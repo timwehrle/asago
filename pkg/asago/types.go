@@ -16,3 +16,10 @@ type Workspace struct {
 type UserResponse struct {
 	Data User `json:"data"`
 }
+
+type Task struct {
+	Gid string `json:"gid"`
+	Name string `json:"name"`
+	ResourceType string `json:"resource_type"`
+	Completed bool `json:"completed"`
+}

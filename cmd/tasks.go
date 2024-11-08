@@ -10,23 +10,24 @@ import (
 	"github.com/timwehrle/asago/pkg/asago"
 )
 
-var UserCmd = &cobra.Command{
-	Use:   "user",
-	Short: "Show the user information.",
+var TasksCmd = &cobra.Command{
+	Use: "tasks",
 	Run: func(cmd *cobra.Command, args []string) {
 		token, err := asago.GetToken()
 		if err != nil {
 			log.Fatalf("failed to get token: %v", err)
-		}
+		}	
 
 		client := api.NewClient(token)
-		meEndpoint := endpoints.Me(client)
+		tasksEndpoint := endpoints.Tasks(client)
 
-		user, err := meEndpoint.Get()
+		tasks, err := tasksEndpoint.ListTasks()
 		if err != nil {
-			log.Fatalf("failed to get user info: %v", err)
+			log.Fatalf("failed to list tasks: %v", err)
 		}
 
-		fmt.Printf("Name: %s\nEmail: %s\n", user.Name, user.Email)
+		for _, task := range tasks {
+			fmt.Printf("Name: %s (Completed: %v)\n", task.Name, task.Completed)
+		}
 	},
 }

@@ -10,10 +10,11 @@ import (
 func init() {
 	RootCmd.AddCommand(ConfigCmd)
 	RootCmd.AddCommand(UserCmd)
+	RootCmd.AddCommand(TasksCmd)
 }
 
 var RootCmd = &cobra.Command{
-	Use: "asago",
+	Use:   "asago",
 	Short: "asago is a CLI tool for managing your Asana.",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Hello, World!")

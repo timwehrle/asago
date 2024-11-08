@@ -9,14 +9,14 @@ const (
 type Client struct {
 	BaseURL    string
 	HTTPClient *http.Client
-	Token string
+	Token      string
 }
 
 func NewClient(token string) *Client {
 	return &Client{
-		BaseURL: Base,
+		BaseURL:    Base,
 		HTTPClient: &http.Client{},
-		Token: token,
+		Token:      token,
 	}
 }
 
@@ -25,6 +25,6 @@ func (c *Client) New(method, endpoint string) (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Add("Authorization", "Bearer " + c.Token)
+	req.Header.Add("Authorization", "Bearer "+c.Token)
 	return req, nil
 }
